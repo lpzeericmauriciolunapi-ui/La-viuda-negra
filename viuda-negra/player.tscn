@@ -1,12 +1,78 @@
-[gd_scene load_steps=4 format=3 uid="uid://bcvqs2q0hgo82"]
+[gd_scene load_steps=17 format=3 uid="uid://bcvqs2q0hgo82"]
 
-[ext_resource type="Script" uid="uid://svjfwxr1uncm" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://dpnxj0v2hsd3e" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="Texture2D" uid="uid://gnlpwiqhx0ck" path="res://sprite_0.png" id="2_onrkg"]
+[ext_resource type="PackedScene" uid="uid://c2mtlk4x1r6lq" path="res://Interactable.tscn" id="3_i3pqv"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_i3pqv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 size = Vector2(15, 20)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i3pqv"]
-radius = 14.0357
+radius = 33.0151
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqtel"]
+atlas = ExtResource("2_onrkg")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sweqy"]
+atlas = ExtResource("2_onrkg")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hs0m"]
+atlas = ExtResource("2_onrkg")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jxqw"]
+atlas = ExtResource("2_onrkg")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dw050"]
+atlas = ExtResource("2_onrkg")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b26j0"]
+atlas = ExtResource("2_onrkg")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7ghd"]
+atlas = ExtResource("2_onrkg")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nvl01"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hqtel")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sweqy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hs0m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jxqw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dw050")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b26j0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7ghd")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_i3pqv"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hqtel"]
+gradient = SubResource("Gradient_i3pqv")
 
 [node name="Node2D" type="Node2D"]
 
@@ -14,30 +80,57 @@ radius = 14.0357
 script = ExtResource("1_4flbx")
 
 [node name="Sprite2D" type="Sprite2D" parent="player"]
+texture = SubResource("ImageTexture_i3pqv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
 position = Vector2(-2.5, 0)
 shape = SubResource("RectangleShape2D_onrkg")
 
 [node name="InteractArea" type="Area2D" parent="player"]
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player/InteractArea"]
-position = Vector2(30, -1)
+position = Vector2(1, 0)
 shape = SubResource("CircleShape2D_i3pqv")
 
 [node name="Camera2D" type="Camera2D" parent="player"]
 
-[node name="Interactable" type="Node2D" parent="."]
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Interactable"]
-
-[node name="Sprite2D" type="Sprite2D" parent="Interactable/StaticBody2D"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable/StaticBody2D"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player"]
+position = Vector2(-3, -33)
+scale = Vector2(0.648438, 0.679688)
+sprite_frames = SubResource("SpriteFrames_nvl01")
+animation = &"walk"
+autoplay = "walk"
+frame_progress = 0.673118
 
 [node name="world" type="Node2D" parent="."]
+position = Vector2(67, -1)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="world"]
 
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 108.0
+offset_top = -61.0
+offset_right = 148.0
+offset_bottom = -38.0
+
+[node name="StaticBody2D" parent="." instance=ExtResource("3_i3pqv")]
+position = Vector2(137, 1)
+
+[node name="Sprite2D2" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(3.8147e-06, 4.76837e-07)
+scale = Vector2(0.25, 0.257813)
+texture = SubResource("GradientTexture2D_hqtel")
+
+[connection signal="area_entered" from="player/InteractArea" to="player" method="_on_interact_area_area_entered"]
+[connection signal="area_exited" from="player/InteractArea" to="player" method="_on_interact_area_area_exited"]
 [connection signal="body_entered" from="player/InteractArea" to="player" method="_on_interact_area_body_entered"]
 [connection signal="body_exited" from="player/InteractArea" to="player" method="_on_interact_area_body_exited"]

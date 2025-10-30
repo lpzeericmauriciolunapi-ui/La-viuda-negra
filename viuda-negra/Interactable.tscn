@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2mtlk4x1r6lq"]
+
+[ext_resource type="Script" uid="uid://01iaoskgve60" path="res://inter.gd" id="1_msfch"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_msfch"]
+radius = 17.1172
+
+[sub_resource type="Gradient" id="Gradient_msfch"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ojdgt"]
+gradient = SubResource("Gradient_msfch")
+
+[node name="StaticBody2D" type="StaticBody2D" groups=["inter"]]
+script = ExtResource("1_msfch")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["inter"]]
+shape = SubResource("CircleShape2D_msfch")
+debug_color = Color(0.454641, 0.513041, 0.800287, 0.42)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 1)
+scale = Vector2(0.0742188, 15)
+texture = SubResource("GradientTexture1D_ojdgt")
