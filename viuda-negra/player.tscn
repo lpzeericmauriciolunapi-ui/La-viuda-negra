@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcvqs2q0hgo82"]
+
+[ext_resource type="Script" uid="uid://svjfwxr1uncm" path="res://player.gd" id="1_4flbx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
+size = Vector2(15, 20)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i3pqv"]
+radius = 14.0357
+
+[node name="Node2D" type="Node2D"]
+
+[node name="player" type="CharacterBody2D" parent="."]
+script = ExtResource("1_4flbx")
+
+[node name="Sprite2D" type="Sprite2D" parent="player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
+position = Vector2(-2.5, 0)
+shape = SubResource("RectangleShape2D_onrkg")
+
+[node name="InteractArea" type="Area2D" parent="player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player/InteractArea"]
+position = Vector2(30, -1)
+shape = SubResource("CircleShape2D_i3pqv")
+
+[node name="Camera2D" type="Camera2D" parent="player"]
+
+[node name="Interactable" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Interactable"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Interactable/StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable/StaticBody2D"]
+
+[node name="world" type="Node2D" parent="."]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="world"]
+
+[connection signal="body_entered" from="player/InteractArea" to="player" method="_on_interact_area_body_entered"]
+[connection signal="body_exited" from="player/InteractArea" to="player" method="_on_interact_area_body_exited"]
