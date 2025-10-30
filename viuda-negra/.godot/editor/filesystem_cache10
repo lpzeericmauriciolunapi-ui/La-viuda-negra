@@ -1,0 +1,9 @@
+63f7b34db8d8cdea90c76aacccf841ec
+::res://::1761844190
+icon.svg::CompressedTexture2D::8091522915348958795::1761843588::1761843634::1::::<><><>0<>0<>e1d6fac465c01de6ad81e805f6af1acd<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+player.gd::GDScript::1307307692076413732::1761843588::0::1::::<>CharacterBody2D<><>0<>0<><>::
+player.tscn::PackedScene::2571155363971790325::1761843588::0::1::::<><><>0<>0<><>::uid://svjfwxr1uncm::::res://player.gd
+::res://sprites/::1761844206
+::res://sprites/tiles/::1761844396
+decorative.png::CompressedTexture2D::4123421564783912793::1620560186::1761844401::1::::<><><>0<>0<>4c89342a6f98b7254085d02985f082f3<>res://.godot/imported/decorative.png-d8e6b93a0e01a947a2b8427bebb06aac.ctex::
+MainLev2.0.png::CompressedTexture2D::8206994116945045652::1638215355::1761844401::1::::<><><>0<>0<>8da7689b67658b9854a3c0633988e02d<>res://.godot/imported/MainLev2.0.png-7bbb10af874c073d4675cc3b55b17481.ctex::
